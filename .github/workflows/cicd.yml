@@ -14,17 +14,17 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t sergio7174/reactNoteCrudAWSEC2-FEDOCKER .
+        run: docker build -t sergio7174/reactnotecrudawsec2-fedocker .
       - name: Publish Image to docker hub
-        run: docker push sergio7174/reactNoteCrudAWSEC2-FEDOCKER:latest
+        run: docker push sergio7174/reactnotecrudawsec2-fedocker:latest
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull sergio7174/reactNoteCrudAWSEC2-FEDOCKER:latest
+        run: docker pull sergio7174/reactnotecrudawsec2-fedocker:latest
       - name: Delete old container
-        run: docker rm -f reactNoteCrudAWSEC2-FEDOCKER
+        run: docker rm -f reactnotecrudawsec2-fedocker
       - name: Run Docker Container
-        run: docker run -d -p 3000:80 --name reactNoteCrudAWSEC2-FEDOCKER sergio7174/reactNoteCrudAWSEC2-FEDOCKER
+        run: docker run -d -p 3000:80 --name reactnotecrudawsec2-fedocker sergio7174/reactnotecrudawsec2-fedocker
