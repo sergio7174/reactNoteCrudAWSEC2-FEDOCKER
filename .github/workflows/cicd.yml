@@ -1,4 +1,4 @@
-name: Deploy reactNoteCrudAWSEC2-frontend 
+name: Deploy reactNoteCrudAWSEC2-FEDOCKER 
 
 on: 
   push:
@@ -14,17 +14,17 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t sergio7174/reactnotescrud-frontend .
+        run: docker build -t sergio7174/reactNoteCrudAWSEC2-FEDOCKER .
       - name: Publish Image to docker hub
-        run: docker push sergio7174/reactnotescrud-frontend:latest
+        run: docker push sergio7174/reactNoteCrudAWSEC2-FEDOCKER:latest
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull sergio7174/reactnotescrud-frontend:latest
+        run: docker pull sergio7174/reactNoteCrudAWSEC2-FEDOCKER:latest
       - name: Delete old container
-        run: docker rm -f reactnotescrud-frontend
+        run: docker rm -f reactNoteCrudAWSEC2-FEDOCKER
       - name: Run Docker Container
-        run: docker run -d -p 3000:80 --name reactnotescrud-frontend sergio7174/reactnotescrud-frontend
+        run: docker run -d -p 3000:80 --name reactNoteCrudAWSEC2-FEDOCKER sergio7174/reactNoteCrudAWSEC2-FEDOCKER
